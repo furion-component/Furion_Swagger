@@ -8,16 +8,18 @@ group = 'com.huibur.furion'
 version = '1.0.0'
 
 repositories {
-    mavenLocal()
-    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     mavenCentral()
-    jcenter()
+}
+
+ext{
+  swagger2Ver = '2.9.2'
+    swaggerUIVer = '2.9.2'
 }
 
 dependencies {
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-    implementation 'com.huibur.furion:furion-common:0.0.4-SNAPSHOT'
+    implementation "io.springfox:springfox-swagger2:$swagger2Ver"
+    implementation "io.springfox:springfox-swagger-ui:$swaggerUIVer"
+    //implementation 'com.huibur.furion:furion-common:0.0.4-SNAPSHOT'
 }
 
 java {
@@ -28,7 +30,7 @@ java {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'furion-base'
+            artifactId = 'furion-swagger'
             from components.java
             versionMapping {
                 usage('java-api') {
@@ -39,26 +41,33 @@ publishing {
                 }
             }
             pom {
-                name = 'furion base'
-                description = 'a base module for java web'
-                url = 'https://github.com/furion-component/Furion-Base.git'
+                name = 'furion swagger'
+                description = 'swagger config'
+                url = 'https://github.com/furion-component/furion-swagger.git'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
                         url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
+                organization {
+                    name = 'HuiBur'
+                    url = 'https://www.huibur.com'
+                }
                 developers {
                     developer {
                         id = 'wenzhijie'
                         name = 'wenzhijie'
                         email = 'wenzhi_jie@126.com'
+                        organization = 'HuiBur'
+                        organizationUrl = 'https://www.huibur.com'
+                        roles = ['owner', 'developer']
                     }
                 }
                 scm {
-                    connection = 'scm:git:git://github.com/furion-component/Furion-Base'
-                    developerConnection = 'scm:git:ssh://git@github.com:furion-component/Furion-Base.git'
-                    url = 'https://github.com/furion-component/Furion-Base.git'
+                    connection = 'scm:git:git://github.com/furion-component/furion-swagger'
+                    developerConnection = 'scm:git:ssh://git@github.com:furion-component/furion-swagger.git'
+                    url = 'https://github.com/furion-component/furion-swagger.git'
                 }
             }
         }
@@ -80,7 +89,7 @@ signing {
 }
 
 javadoc {
-    options{
+    options {
         encoding "UTF-8"
         charSet 'UTF-8'
     }

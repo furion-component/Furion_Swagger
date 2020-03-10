@@ -1,6 +1,5 @@
 package com.huibur.furion.swagger.utils;
 
-import com.huibur.furion.common.io.PropertiesUtils;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -20,12 +19,11 @@ public class SwaggerUtil {
     }
 
     private static ApiInfo apiInfo() {
-        String applicationContext = PropertiesUtils.getInstance().getProperty("server.servlet.context-path", "/Furion");
         return new ApiInfoBuilder()
-                .title(applicationContext.substring(1) +" RESTful APIs")
+                .title(" RESTful APIs")
                 .version("1.0.0")
                 .description("API 描述")
-                .contact(new Contact("HuiBur", "", ""))
+                .contact(new Contact("", "", ""))
                 .build();
     }
 
@@ -34,7 +32,7 @@ public class SwaggerUtil {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()   // 选择那些路径和api会生成document
-                .apis(RequestHandlerSelectors.basePackage("com.huibur"))
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(securitySchemes())
@@ -56,7 +54,7 @@ public class SwaggerUtil {
 
     private static List<ApiKey> securitySchemes() {
         List<ApiKey> apiKeyList= new ArrayList();
-        apiKeyList.add(new ApiKey("Authorization", "Token", "header"));
+        apiKeyList.add(new ApiKey("Authorization", "Authorization", "header"));
         return apiKeyList;
     }
 

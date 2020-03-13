@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.huibur.furion'
-version = '1.0.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -17,9 +17,8 @@ ext{
 }
 
 dependencies {
-    implementation "io.springfox:springfox-swagger2:$swagger2Ver"
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: swagger2Ver
     implementation "io.springfox:springfox-swagger-ui:$swaggerUIVer"
-    //implementation 'com.huibur.furion:furion-common:0.0.4-SNAPSHOT'
 }
 
 java {
@@ -31,6 +30,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = 'furion-swagger'
+            version = '1.0.1'
             from components.java
             versionMapping {
                 usage('java-api') {
